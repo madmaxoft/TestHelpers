@@ -162,6 +162,22 @@ public:
 
 
 
+/** Checks that the specified pointer / object is not equal to nullptr. */
+#define TEST_NOTNULL(Stmt) \
+	do \
+	{ \
+		if (Stmt == nullptr) \
+		{ \
+			throw TestException(__FILE__, __LINE__, __FUNCTION__, fmt::format("Object is null: {}", \
+				#Stmt \
+			)); \
+		} \
+	} while (false)
+
+
+
+
+
 /** Checks that the statement throws an exception of the specified class. */
 #define TEST_THROWS(Stmt, ExcClass) \
 	try \
@@ -178,7 +194,7 @@ public:
 	catch (const std::exception & exc) \
 	{ \
 		throw TestException(__FILE__, __LINE__, __FUNCTION__, fmt::format("An unexpected std::exception descendant was thrown, was expecting type {}. Exception message is: {}", \
-			#ExcClass, exc \
+			#ExcClass, exc.what() \
 		)); \
 	} \
 	catch (...) \
