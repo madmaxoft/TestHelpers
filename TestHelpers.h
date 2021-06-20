@@ -258,12 +258,12 @@ int main() \
 	} \
 	catch (const std::exception & exc) \
 	{ \
-		fmt::print("Test has failed, an exception was thrown: {}\n", exc.what()); \
+		fmt::print("Test has failed, an unhandled exception was thrown: {}\n", exc.what()); \
 		return 1; \
 	} \
 	catch (...) \
 	{ \
-		fmt::print("Test has failed, an unhandled exception was thrown.\n"); \
+		fmt::print("Test has failed, an unhandled unknown exception was thrown.\n"); \
 		return 1; \
 	} \
 	\
